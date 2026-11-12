@@ -22,19 +22,24 @@ body{background:#f8fafc;-webkit-font-smoothing:antialiased;-webkit-text-size-adj
 .slp-scope .slp-bg{position:absolute;inset:0;z-index:-1;pointer-events:none}
 .slp-scope .slp-orb{position:absolute;width:46vmax;height:46vmax;border-radius:50%;filter:blur(110px);opacity:.28;will-change:transform}
 .slp-scope .slp-orb-blue{background:#338CFC;top:-18vmax;left:-12vmax;animation:slp-drift-a 26s ease-in-out infinite alternate}
-.slp-scope .slp-orb-green{background:#49CE7F;bottom:-20vmax;right:-14vmax;animation:slp-drift-b 32s ease-in-out infinite alternate}
+/* Green orb sits at the bottom of the first screen, beside the calculator, not at the bottom of the long page */
+.slp-scope .slp-orb-green{background:#49CE7F;top:calc(100vh - 30vmax);right:-14vmax;animation:slp-drift-b 32s ease-in-out infinite alternate}
 @keyframes slp-drift-a{to{transform:translate(38vw,30vh) scale(1.15)}}
-@keyframes slp-drift-b{to{transform:translate(-40vw,-34vh) scale(.9)}}
+@keyframes slp-drift-b{to{transform:translate(-36vw,8vh) scale(.9)}}
 @media (prefers-reduced-motion:reduce){.slp-scope .slp-orb{animation:none}}
 
 /* Hero */
 .slp-scope .slp-hero{background:transparent;padding:56px 16px 32px;text-align:center}
 .slp-scope .slp-hero h1{margin:0;font-size:clamp(26px,4.4vw,38px);font-weight:700;letter-spacing:-.5px;line-height:1.15;color:var(--ink)}
 .slp-scope .slp-hero p{margin:10px auto 0;color:var(--muted);font-size:15px;max-width:460px}
-.slp-scope .slp-flag{display:block;width:48px;height:auto;margin:0 auto 16px;border-radius:5px;box-shadow:0 0 0 1px var(--line),0 2px 6px rgba(16,24,40,.08)}
+/* PeoplesHR logo above the title */
+.slp-scope .slp-brand-logo{display:block;height:40px;width:auto;margin:0 auto 22px}
 
 /* Card */
-.slp-scope .slp-card{max-width:560px;margin:0 auto;background:var(--bg-white);border:1px solid var(--line);border-radius:20px;box-shadow:0 1px 2px rgba(16,24,40,.04),0 8px 24px rgba(16,24,40,.06)}
+/* The calculator is the main card: blue-tinted border, deeper shadow and a blue-to-green strip on top.
+   The reference cards below (.slp-table-card) are deliberately flatter so the two never look alike. */
+/* The strip is a background layer (not a separate element), so the card's own rounded corners clip it exactly */
+.slp-scope .slp-card{position:relative;max-width:560px;margin:0 auto;background:linear-gradient(90deg,var(--blue),#49CE7F) top/100% 6px no-repeat border-box,var(--bg-white);border:1px solid var(--phr-border);border-top-color:transparent;border-radius:20px;box-shadow:0 2px 4px rgba(13,71,161,.06),0 24px 56px rgba(13,71,161,.16)}
 .slp-scope .slp-wrap{padding:0 16px}
 .slp-scope .slp-form{padding:28px}
 .slp-scope .slp-label{display:block;font-size:13px;font-weight:700;color:var(--text-body);margin:0 0 8px}
@@ -79,8 +84,12 @@ body{background:#f8fafc;-webkit-font-smoothing:antialiased;-webkit-text-size-adj
 .slp-scope .slp-error{margin:10px 0 0;color:var(--red);font-size:13px;font-weight:600}
 
 /* Results */
-.slp-scope .slp-results{border-top:1px solid var(--line);padding:26px 28px 28px;background:var(--bg-white);border-radius:0 0 20px 20px;transition:opacity .2s}
+.slp-scope .slp-results{border-top:1px solid var(--line);padding:26px 28px 28px;background:var(--bg-white);transition:opacity .2s}
 .slp-scope .slp-results.is-stale{opacity:.45}
+/* "Powered by PeoplesHR" footer inside the calculator card, so the logo is in every screenshot of a result */
+.slp-scope .slp-powered{display:flex;align-items:center;justify-content:center;gap:10px;padding:14px 16px;border-top:1px solid var(--line);background:var(--phr-blue-30);border-radius:0 0 19px 19px;text-decoration:none;font-size:12px;font-weight:600;color:var(--muted);transition:background .15s}
+.slp-scope .slp-powered:hover{background:var(--phr-blue-50)}
+.slp-scope .slp-powered img{display:block;height:22px;width:auto}
 .slp-scope .slp-net{text-align:center;padding:4px 0 22px}
 .slp-scope .slp-net small{display:block;font-size:13px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:.06em}
 .slp-scope .slp-net b{display:block;font-size:clamp(30px,7vw,40px);letter-spacing:-.5px;color:var(--ink);margin-top:4px}
@@ -96,7 +105,10 @@ body{background:#f8fafc;-webkit-font-smoothing:antialiased;-webkit-text-size-adj
 .slp-scope .slp-line--total span,.slp-scope .slp-line--total b{color:var(--green);font-weight:700}
 .slp-scope .slp-sub{margin:20px 0 8px;font-size:13px;font-weight:700;color:var(--text-body)}
 /* Tax table */
-.slp-scope .slp-table-card{max-width:560px;margin:28px auto 0;background:var(--bg-white);box-shadow:0 1px 2px rgba(16,24,40,.04),0 8px 24px rgba(16,24,40,.06);border:1px solid var(--line);border-radius:20px;padding:24px 28px}
+/* Reference cards: see-through, no shadow, smaller radius */
+.slp-scope .slp-section-label{max-width:560px;margin:56px auto 0;display:flex;align-items:center;gap:12px;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.slp-scope .slp-section-label::before,.slp-scope .slp-section-label::after{content:"";flex:1;height:1px;background:var(--line)}
+.slp-scope .slp-table-card{max-width:560px;margin:16px auto 0;background:rgba(255,255,255,.55);border:1px solid var(--line);border-radius:16px;padding:22px 24px}
 .slp-scope .slp-table-card h2{margin:0;font-size:18px;font-weight:700;color:var(--ink)}
 .slp-scope .slp-table-sub{margin:4px 0 14px;font-size:13px;color:var(--muted)}
 .slp-scope .slp-table-sub a{color:var(--blue);text-decoration:underline}
@@ -125,14 +137,18 @@ body{background:#f8fafc;-webkit-font-smoothing:antialiased;-webkit-text-size-adj
 .slp-scope .slp-compare .slp-table td:last-child{color:var(--blue)}
 
 /* FAQ */
-.slp-scope .slp-faq h2{margin-bottom:6px}
-.slp-scope .slp-faq-item{border-bottom:1px solid var(--bg-card)}
-.slp-scope .slp-faq-item:last-child{border-bottom:0}
-.slp-scope .slp-faq-item summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:48px;padding:10px 0;font-size:14px;font-weight:700;color:var(--ink)}
+/* Same look as the FAQ on the salary and tax calculators: bordered rounded items with a chevron */
+/* No outer card around the FAQ: the questions sit straight on the page */
+.slp-scope .slp-table-card.slp-faq{background:none;border:0;border-radius:0;padding:0;margin-top:40px}
+.slp-scope .slp-faq h2{margin:0 0 12px}
+.slp-scope .slp-faq-item{border:1px solid var(--line);border-radius:14px;padding:0 16px;margin-bottom:8px;background:var(--bg-white)}
+.slp-scope .slp-faq-item:last-child{margin-bottom:0}
+.slp-scope .slp-faq-item summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:12px;padding:14px 0;font-size:14px;font-weight:700;color:var(--ink)}
 .slp-scope .slp-faq-item summary::-webkit-details-marker{display:none}
-.slp-scope .slp-faq-item summary::after{content:"+";flex:none;font-size:20px;font-weight:500;color:var(--blue);transition:transform .2s}
-.slp-scope .slp-faq-item[open] summary::after{transform:rotate(45deg)}
-.slp-scope .slp-faq-item p{margin:0 0 14px;font-size:14px;line-height:1.6;color:var(--text-body)}
+.slp-scope .slp-faq-item summary::after{content:"";flex:none;align-self:center;width:8px;height:8px;margin:0 4px 3px 0;border-right:2px solid var(--blue);border-bottom:2px solid var(--blue);transform:rotate(45deg);transition:transform .2s ease}
+.slp-scope .slp-faq-item[open] summary::after{margin:3px 4px 0 0;transform:rotate(-135deg)}
+.slp-scope .slp-faq-item p{margin:0 0 14px;font-size:13px;color:#475467}
+.slp-scope .slp-faq-item a{color:var(--blue);font-weight:600;text-decoration:underline;text-underline-offset:2px}
 
 /* Disclaimer */
 .slp-scope .slp-disclaimer{max-width:560px;margin:24px auto 0;font-size:12px;line-height:1.55;color:var(--muted)}
@@ -152,6 +168,7 @@ body{background:#f8fafc;-webkit-font-smoothing:antialiased;-webkit-text-size-adj
 @media (max-width:560px){
   .slp-scope .slp-hero{padding:36px 16px 24px}
   .slp-scope .slp-hero p{font-size:14px}
+  .slp-scope .slp-brand-logo{height:32px;margin-bottom:18px}
   .slp-scope .slp-form{padding:22px 18px}
   .slp-scope .slp-results{padding:22px 18px}
   .slp-scope .slp-row{grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr) 32px;gap:6px}
@@ -162,7 +179,8 @@ body{background:#f8fafc;-webkit-font-smoothing:antialiased;-webkit-text-size-adj
   /* 16px inputs stop iOS Safari zooming in on focus */
   .slp-scope .slp-money input,.slp-scope .slp-name,.slp-scope .slp-money--sm input{font-size:16px}
   .slp-scope .slp-remove{width:32px;height:44px}
-  .slp-scope .slp-table-card{padding:20px 18px;margin-top:20px}
+  .slp-scope .slp-table-card{padding:20px 18px;margin-top:14px}
+  .slp-scope .slp-section-label{margin-top:40px}
   .slp-scope .slp-table{font-size:13px}
 }
 
