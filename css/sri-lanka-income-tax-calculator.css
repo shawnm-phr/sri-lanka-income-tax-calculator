@@ -119,6 +119,11 @@ body{background:#f8fafc;-webkit-font-smoothing:antialiased;-webkit-text-size-adj
 .slp-scope .slp-example .slp-ex-net td{color:var(--green);font-weight:700}
 .slp-scope .slp-ex-foot{margin:10px 0 0;font-size:12px;color:var(--muted)}
 
+.slp-scope .slp-updated{margin:10px auto 0!important;font-size:12px!important;color:var(--muted)!important}
+.slp-scope .slp-compare .slp-table td:nth-child(2),.slp-scope .slp-compare .slp-table td:last-child{font-weight:600}
+.slp-scope .slp-compare .slp-table td:first-child{font-weight:700;color:var(--ink)}
+.slp-scope .slp-compare .slp-table td:last-child{color:var(--blue)}
+
 /* FAQ */
 .slp-scope .slp-faq h2{margin-bottom:6px}
 .slp-scope .slp-faq-item{border-bottom:1px solid var(--bg-card)}
